@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.dropify-wrapper{
+    height: 250px !important;
+}
+
+.ql-editor{
+    min-height: 200px;
+}
