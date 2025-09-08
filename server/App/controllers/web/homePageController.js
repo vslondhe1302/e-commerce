@@ -104,11 +104,45 @@ let colorList = async (req,res) =>{
 
 let productListingData = async (req,res) =>{
     let {slug} = req.query
-    console.log(req.query);
+    console.log(req.body);
+
+    let query = {}
+    let materialQuery = []
+    let colorQuery = []
+    let priceQuery = {}
+    console.log(priceQuery);
     
+    
+
     let subSubCategoryId = await subSubCategoryModel.find({slug : slug},{subSubCategoryStatus : true}).select("_id")    
 
-    let data = await productModel.find({subSubCategory : subSubCategoryId})    
+    if(subSubCategoryId){
+        query = subSubCategoryId
+    }
+    if(req.body.checkIds?.length){
+        for(let v of req.body.checkIds){
+            query = v
+        }
+    }
+    if(req.body.checkMaterial?.length){
+        for(let v of req.body.checkMaterial){
+            materialQuery = v
+        }   
+    }
+    if(req.body.checkColor?.length){
+        for(let v of req.body.checkColor){
+            colorQuery = v
+        }   
+    }
+    if(req.body.maxPrice!=null){
+        priceQuery = {$gte:Number(1000),$lte:Number(req.body.maxPrice)}
+    }
+
+    let data = await productModel.find({
+        subSubCategory : {$in:query},
+        productMaterial:{$in:materialQuery},
+        productColor:{$in:colorQuery},
+    })    
     .populate('subSubCategory','subSubCategoryName')
 
     let obj = {

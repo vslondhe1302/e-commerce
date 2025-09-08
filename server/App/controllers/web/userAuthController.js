@@ -149,6 +149,8 @@ let updateProfile = async (req, res) => {
 
 let googleLogin = async (req,res) =>{
     let {name,email,phone} = req.body
+    console.log(req.body);
+    
     
     let myRes;
     let checkEmail = await userModel.findOne({ userEmail: email })
