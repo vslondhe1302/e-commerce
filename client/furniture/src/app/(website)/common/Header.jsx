@@ -5,14 +5,13 @@ import { PiHeartStraightFill } from "react-icons/pi";
 import { IoMdCart } from "react-icons/io";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { LuMenu } from "react-icons/lu";
-import { HiMiniXMark, HiXMark } from "react-icons/hi2";
+import { HiXMark } from "react-icons/hi2";
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/app/slice/userSlice';
 import { store } from '@/app/store/store';
 import { fetchCart } from '@/app/slice/cartSlice';
 import { useRouter } from 'next/navigation';
-import { FaXmark } from 'react-icons/fa6';
 import axios from 'axios';
 import CartSideBar from './header/headerComponents/CartSideBar';
 
@@ -225,7 +224,7 @@ console.log(isMobile, showSubCat);
                                 <li className='p-2 border-b-1 border-b-gray-200 duration-300 hover:bg-gray-50'>
                                     <Link href={'/my-dashboard'} className='hover:text-[var(--secondary_text_color)] duration-300 lg:text-[13px] capitalize leading-[18px] text-[var(--gray_text)] tracking-[0.5px] text-[11px] font-[600]'>My Dashboard</Link>
                                 </li>
-                                <li className='p-2 hover:bg-gray-50 duration-300'>
+                                <li className='p-2 hover:bg-gray-50 duration-300 cursor-pointer'>
                                     <div onClick={() => {
                                         dispatch(logout())
                                         router.push('/login')

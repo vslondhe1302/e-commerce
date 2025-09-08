@@ -16,18 +16,18 @@ export default function Featured({ productType, setProductType, productData, sta
                 <div className='max-w-[1320px] mx-auto'>
                     <div className='w-[100%] mb-[35px] featured'>
                         <ul className='flex sm:flex-row flex-col justify-center items-center'>
-                            <li onClick={() => setProductType(1)} className={`${productType == 1 ? 'active' : ''} ml-[-2px] before lg:w-[160px] w-[140px] text-center sm:border-[2px] border-[1px] border-gray-300 text-[var(--gray_text_color)] duration-300 relative`}>
+                            <li onClick={() => setProductType(1)} className={`${productType == 1 ? 'active' : ''} lg:ml-[-1px]  sm:ml-[1px] sm:mt-0 mt-[-2px] before lg:w-[160px] w-[140px] text-center sm:border-[2px] border-[2px] border-gray-300 text-[var(--gray_text_color)] duration-300 relative`}>
                                 <Link href={'#'} onClick={(e) => { e.preventDefault() }} className='lg:px-[30px] lg:text-[20px] text-[14px] lg:leading-[48px] leading-[30px] font-[font-playfair] font-[700] '>Featured</Link>
                             </li>
-                            <li onClick={() => setProductType(2)} className={`${productType == 2 ? 'active' : ''} ml-[-2px] lg:w-[185px] w-[140px]  text-center sm:border-[2px] border-[1px] border-gray-300  text-[var(--gray_text_color)] duration-300`}>
+                            <li onClick={() => setProductType(2)} className={`${productType == 2 ? 'active' : ''} sm:ml-[-2px] sm:mr-[1.0px] ml-0 sm:mt-0 mt-[-2px] lg:w-[185px] w-[140px]  text-center sm:border-[2px] border-[2px] border-gray-300  text-[var(--gray_text_color)] duration-300`}>
                                 <Link href={'#'} onClick={(e) => { e.preventDefault() }} className='lg:px-[30px]  lg:text-[20px] text-[14px] lg:leading-[48px] leading-[30px] font-[font-playfair] font-[700] '>New Arrivals</Link>
                             </li>
-                            <li onClick={() => setProductType(3)} className={`${productType == 3 ? 'active' : ''} ml-[-2px] lg:w-[160px] w-[140px] text-center after sm:border-[2px] border-[1px] border-gray-300 text-[var(--gray_text_color)] duration-300 relative`}>
+                            <li onClick={() => setProductType(3)} className={`${productType == 3 ? 'active' : ''} sm:ml-[-2.5px] ml-0 sm:mt-0 mt-[-2px] lg:w-[160px] w-[140px] text-center after sm:border-[2px] border-[2px] border-gray-300 text-[var(--gray_text_color)] duration-300 relative`}>
                                 <Link href={'#'} onClick={(e) => { e.preventDefault() }} className='lg:px-[30px]  lg:text-[20px] text-[14px] lg:leading-[48px] leading-[30px] font-[font-playfair] font-[700] '>Onsale</Link>
                             </li>
                         </ul>
                     </div>
-                    <div className='mb-5'>
+                    <div className='mb-8'>
                         {productData.length != 0 ?
                             productData.map((items, index) => {
                                 return (
@@ -38,7 +38,7 @@ export default function Featured({ productType, setProductType, productData, sta
 
                             })
                             :
-                            <div key={1} className='text-center '>
+                            <div key={1} className='text-center my-10 '>
                                 <span className='lg:text-[16px] sm:text-[15px] text-[13px] text-center text-[var(--primary_text_color)] font-[500]'>
                                     This products are not available currently
                                 </span>
@@ -111,9 +111,9 @@ function FeaturedItems({ items, staticPath }) {
     }
     return (
         <>
-            <div className='max-w-[1320px] mx-auto lg:shadow-[0px_0px_35px_0px_rgba(0,0,0,0.3)] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] border-[0.1px] border-gray-200 rounded-[4px] lg:pb-[30px] pb-[20px] lg:mb-[0px] mb-[16px]'>
+        <div className='max-w-[1320px] mx-auto lg:shadow-[0px_0px_35px_0px_rgba(0,0,0,0.3)] shadow-[0px_0px_10px_0px_rgba(0,0,0,0.3)] rounded-[4px] lg:pb-[30px] pb-[20px] lg:mb-[0px] mb-[16px]'>
                 <Link href={`/product/${items.slug}`}>
-                    <img src={staticPath + items.productImage} alt="" className='rounded-[4px]' />
+                    <img src={staticPath + items.productImage} alt="" className='rounded-t-[4px]' />
                 </Link>
                 <div className='product-content w-[100%] mt-[8px]'>
                     <div className='lg:mb-[10px] text-center'>
@@ -163,7 +163,8 @@ function FeaturedItems({ items, staticPath }) {
                         </ul>
                     </div>
                 </div>
-            </div>
+        </div>
+        
         </>
     )
 }

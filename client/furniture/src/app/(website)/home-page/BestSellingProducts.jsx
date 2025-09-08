@@ -54,7 +54,7 @@ export default function BestSellingProducts({ bestSelling, staticPath }) {
                         <Slider {...settings} className=''>
                             <div>
                                 {
-                                    bestSelling.map((items, index) => <SliderItems items={items} key={index} staticPath={staticPath} />)
+                                    bestSelling?.map((items, index) => <SliderItems items={items} key={index} staticPath={staticPath} />)
                                 }
                             </div>
                         </Slider>
@@ -73,9 +73,9 @@ export default function BestSellingProducts({ bestSelling, staticPath }) {
 
 function SliderItems({ items, staticPath, index }) {
     return (
-        <div key={index} className='max-w-[1320px] shadow-[0px_0px_14px_0px_rgba(0,0,0,0.15)] border-[0.1px] border-gray-200 lg:pb-[30px] pb-[20px] lg:my-[30px]'>
+        <div key={index} className='max-w-[1320px] shadow-[0px_0px_14px_0px_rgba(0,0,0,0.15)]  rounded-[4px] lg:pb-[30px] pb-[20px] lg:my-[30px]'>
             <Link href={`/product/${items.slug}`}>
-                <img src={staticPath + items.productImage} alt="preview" className='' />
+                <img src={staticPath + items.productImage} alt="preview" className='rounded-t-[4px]' />
             </Link>
             <div className='product-content w-[100%] mt-[8px]'>
                 <div className='mb-[10px] text-center'>

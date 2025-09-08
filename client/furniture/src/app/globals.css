@@ -127,7 +127,8 @@
     color: var(--secondary_text_color);
 }
 
-.featured>ul .before::before{
+@media (min-width:768px) {
+.before::before{
     content: '';
     width: 200px;
     height: 2px;
@@ -136,7 +137,7 @@
     right: calc(100% + 1px);
     top: 50%;
 }
-.featured>ul .after::after{
+.after::after{
     content: '';
     width: 200px;
     height: 2px;
@@ -144,6 +145,7 @@
     position: absolute;
     left:calc(100% + 1px);
     top: 50%;
+}
 }
 .product-content h3::before{
     content: '';

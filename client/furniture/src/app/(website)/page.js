@@ -93,7 +93,7 @@ export default function Home() {
       <Collection/>
       <Featured productType={productType} setProductType={setProductType} productData={productData} staticPath={productStaticPath}  />  
       <Banner2/> 
-      <BestSellingProducts bestSelling = {bestSelling} staticPath={productStaticPath}/>
+      <BestSellingProducts bestSelling = {bestSelling} staticPath={productStaticPath} />
       <ShipingArea/>
       <Testimonial data = {testimonialData} staticPath = {testimonialStaticPath} />
       <NewsLetter/>

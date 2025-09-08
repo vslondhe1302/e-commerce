@@ -10,7 +10,7 @@ import axios from 'axios';
 export default function ProductPage({ slug }) {
   let [sortMenu, setSortMenu] = useState(false)
   let [categoryMenu, setCategoryMenu] = useState(false)
-  let [value, setValue] = useState(100000)
+  let [price, setPrice] = useState(100000)
 
   let [clickedIndex, setClickedIndex] = useState(0)
   let [clickedList, setClickedList] = useState('Sort By')
@@ -22,17 +22,47 @@ export default function ProductPage({ slug }) {
   let [materialList, setMaterialList] = useState([])
   let [colorList, setColorList] = useState([])
 
-  // let obj = (e) =>{
-  //   let v ={
-  //     tableSubSubCategory : [e.target.checked],
-  //     sofaSubSubCategory : [e.target.checked],
-  //     material : [e.target.checked],
-  //     color : [e.target.checked],
-  //     price : value
-  //   }
-  //     console.log(v);
+  let [checkIds, setCheckIds] = useState([])
+  let [checkMaterial, setCheckMaterial] = useState([])
+  let [checkColor, setCheckColor] = useState([])
+  let [maxPrice, setMaxPrice] = useState(null)
 
-  // }
+  let getCheckValue = (e) =>{
+    if(e.target.checked && !checkIds.includes(e.target.value)){
+      setCheckIds([...checkIds,e.target.value])
+    }
+    else{
+      setCheckIds(checkIds.filter((v)=>!v.includes(e.target.value)))
+    }
+  }
+
+  let getCheckMaterial = (e) =>{
+    if(e.target.checked && !checkMaterial.includes(e.target.value)){
+      setCheckMaterial([...checkMaterial,e.target.value])
+    }
+    else{
+      setCheckMaterial(checkMaterial.filter((v)=>!v.includes(e.target.value)))
+    }
+  }
+  
+  let getCheckColor = (e) =>{
+    if(e.target.checked && !checkColor.includes(e.target.value)){
+      setCheckColor([...checkColor,e.target.value])
+    }
+    else{
+      setCheckColor(checkColor.filter((v)=>!v.includes(e.target.value)))
+    }
+  }
+
+  let handleMouseUp = () =>{
+    setMaxPrice(price)
+  }
+  
+  console.log(checkIds)
+  console.log(checkMaterial);
+  console.log(checkColor);
+  console.log(maxPrice);
+  
   
 
   let apiBaseUrl = process.env.NEXT_PUBLIC_APIBASEURL
@@ -42,7 +72,6 @@ export default function ProductPage({ slug }) {
       .then((res) => res.data)
       .then((finalRes) => {
         if (finalRes.status) {
-          console.log(finalRes);
           setLiving(finalRes.data[0].subcategories)
           setSofa(finalRes.data[1].subcategories)
         }
@@ -55,7 +84,6 @@ export default function ProductPage({ slug }) {
       .then((res) => res.data)
       .then((finalRes) => {
         if (finalRes.status) {
-          console.log(finalRes);
           setMaterialList(finalRes.data)
         }
 
@@ -67,7 +95,6 @@ export default function ProductPage({ slug }) {
       .then((res) => res.data)
       .then((finalRes) => {
         if (finalRes.status) {
-          console.log(finalRes);
           setColorList(finalRes.data)
         }
 
@@ -85,11 +112,12 @@ export default function ProductPage({ slug }) {
 
     <div className='w-[100%] pb-[65px]'>
       <div className='max-w-[1320px] mx-auto grid lg:grid-cols-[20%_78%] gap-[2%] '>
-        <div className='lg:pr-[25px] w-[100%] lg:order-1 order-2'>
+        <div onClick={()=>setCategoryMenu(false)} className={`${categoryMenu ? '' : 'hidden'} lg:hidden w-full h-[100vh] bg-[rgba(0,0,0,0.5)] fixed top-0 left-0 z-20`}></div>
+        <div className='lg:pr-[25px] w-[100%] order-1 relative'>
           <h2 onClick={() => setCategoryMenu(!categoryMenu)} className='lg:text-[24px] lg:hidden text-[16px] leading-[32px] mb-[20px] font-[font-playfair] font-[700] text-[var(--primary_text_color)] lg:border-0 lg:px-0 px-[20px] inline-block border-[0.1px] border-gray-200'>
             Categories <HiMenuAlt2 className='lg:hidden inline-block ml-2' />
           </h2>
-          <div className={`${categoryMenu ? '' : 'hidden'} lg:block`}>
+          <div className={`${categoryMenu ? 'left-0' : 'left-[-800px]'} lg:block lg:static fixed top-0 duration-300 z-[25] bg-white max-w-[270px] p-4 h-full`}>
             <div className='max-h-[500px] pb-[30px] mb-[20px] overflow-y-scroll w-[100%] border-b-[0.1px] border-gray-200'>
               <h2 className='lg:text-[24px] text-[16px] leading-[32px] mb-[20px] font-[font-playfair] font-[700] text-[var(--primary_text_color)] lg:border-0 lg:block lg:px-0 px-[20px] hidden border-[0.1px] border-gray-200'>
                 Categories
@@ -105,7 +133,8 @@ export default function ProductPage({ slug }) {
                     <ul>
                       {livingCategory.subsubcategories.map((value, idx) => (
                         <li key={idx} className='flex items-center'>
-                          <input onChange={obj} type="checkbox" multiple name="tableSubSubCategory" id="" value={value._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px]' />
+                          <input onChange={getCheckValue} //checked={ checkIds.includes(value._id) || slug==value.slug}// 
+                          type="checkbox" multiple name="tableSubSubCategory" id="" value={value._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px] cursor-pointer' />
                           <label className='lg:text-[14px] text-[12px] lg:leading-[44px] leading-[30px] lg:pl-[24px] pl-[10px] font-[font-rubik] text-[var(--gray_text_color)]'>
                             {value.subSubCategoryName}
                           </label>
@@ -126,7 +155,7 @@ export default function ProductPage({ slug }) {
                     <ul>
                       {sofaCategory.subsubcategories.map((value, idx) => (
                         <li key={idx} className='flex items-center'>
-                          <input onChange={obj} type="checkbox" multiple name="sofaSubSubCategory" id="" value={value._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px]' />
+                          <input onChange={getCheckValue} type="checkbox" multiple name="sofaSubSubCategory" id="" value={value._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px] cursor-pointer' />
                           <label htmlFor="" className='lg:text-[14px] text-[12px] lg:leading-[44px] leading-[30px] lg:pl-[24px] pl-[10px] font-[font-rubik] text-[var(--gray_text_color)]'>
                             {value.subSubCategoryName}
                           </label>
@@ -147,7 +176,7 @@ export default function ProductPage({ slug }) {
                   {materialList.map((items, index) => {
                     return (
                       <li key={index} className='flex items-center'>
-                        <input onChange={obj} type="checkbox" multiple name="material" id="" value={items._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px]' />
+                        <input onChange={getCheckMaterial} type="checkbox" multiple name="material" id="" value={items._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px] cursor-pointer' />
                         <label htmlFor="" className='lg:text-[14px] text-[12px] lg:leading-[44px] leading-[30px] lg:pl-[24px] pl-[10px] font-[font-rubik] text-[var(--gray_text_color)]'>
                           {items.materialName}
                         </label>
@@ -158,7 +187,7 @@ export default function ProductPage({ slug }) {
               </div>
             </div>
 
-            <div className='max-h-[480px] pb-[30px] mb-[20px] w-[100%] border-b-[0.1px] border-gray-200'>
+            <div className='max-h-[480px] overflow-y-scroll pb-[30px] mb-[20px] w-[100%] border-b-[0.1px] border-gray-200'>
               <div className='color-data '>
                 <h4 className='lg:text-[18px] text-[14px] lg:leading-[44px] leading-[30px] font-[font-playfair] font-[700] text-[var(--gray_text_color)]'>
                   Color
@@ -166,7 +195,7 @@ export default function ProductPage({ slug }) {
                 <ul>
                   {colorList.map((items, index) => (
                     <li key={index} className='flex items-center'>
-                      <input onChange={obj} type="checkbox" multiple name="color" id="" value={items._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px]' />
+                      <input onChange={getCheckColor} type="checkbox" multiple name="color" id="" value={items._id} className='lg:w-[18px] lg:h-[18px] w-[14px] h-[14px] leading-[17px] cursor-pointer' />
                       <label htmlFor="" className='lg:text-[14px] text-[12px] lg:leading-[44px] leading-[30px] lg:pl-[24px] pl-[10px] font-[font-rubik] text-[var(--gray_text_color)]'>
                         {items.colorName}
                       </label>
@@ -180,8 +209,10 @@ export default function ProductPage({ slug }) {
                 <lable className='lg:text-[18px] text-[14px] lg:leading-[44px] sm:leading-[30px] leading-[26px] lg:mb-[20px] mb-3 font-[font-playfair] font-[700] text-[var(--gray_text_color)] block'>
                   Filter by price
                 </lable>
-                <input onChange={(e)=>setValue(e.target.value)} type="range" name="price" id="filter" value={value} min='0' step={100} max='200000' className='range lg:w-[100%] w-[50%] mx-auto py-[10px] cursor-pointer' />
-                <span className='block lg:text-[14px] text-[12px] text-[var(--primary_text_color)] lg:mb-[16px] mb-[10px]'>Rs. {value} - Rs. 2,00000</span>
+                <input onChange={(e)=>setPrice(e.target.value)} onMouseUp={handleMouseUp} onTouchEnd={handleMouseUp} type="range" name="price" id="filter" value={price} min='0' step={100} max='200000' className='range lg:w-[100%] w-[50%] mx-auto py-[10px] cursor-pointer' />
+                <span className='block lg:text-[14px] text-[12px] text-[var(--primary_text_color)] lg:mb-[16px] mb-[10px]'>
+                  Rs. {price} - Rs. 2,00000
+                </span>
                 <button className='lg:px-[30px] px-[16px] leading-[24px] lg:leading-[30px] text-[14px] rounded-[4px] bg-[var(--primary_text_color)] hover:bg-[var(--bg_color)] duration-300 text-white'>Filter</button>
               </form>
             </div>
@@ -227,7 +258,7 @@ export default function ProductPage({ slug }) {
 
           <div>
 
-            <MainPage slug={slug} />
+            <MainPage slug={slug} checkIds={checkIds} checkMaterial={checkMaterial} checkColor={checkColor} maxPrice={maxPrice} />
 
           </div>
         </div>
@@ -237,14 +268,23 @@ export default function ProductPage({ slug }) {
   )
 }
 
-function MainPage ({ slug }) {
+function MainPage ({ slug,checkIds,checkMaterial,checkColor,maxPrice }) {
   let [productListing, setProductListing] = useState([])
   let [listingStaticPath, setListingStaticPath] = useState('')
+
+  let filterObj = {
+    checkColor,
+    checkMaterial,
+    checkIds,
+    maxPrice
+  }
+
   let apiBaseUrl = process.env.NEXT_PUBLIC_APIBASEURL
+
   let getProductList = () => {
-    axios.get(`${apiBaseUrl}home/product-listing`, {
+    axios.post(`${apiBaseUrl}home/product-listing`,filterObj, {
       params: {
-        slug
+        slug,
       }
     })
       .then((res) => res.data)
@@ -257,8 +297,7 @@ function MainPage ({ slug }) {
 
   useEffect(() => {
     getProductList();
-
-  }, [])
+  }, [slug,checkIds,checkMaterial,checkColor])
 
   return (
     <>

@@ -133,20 +133,20 @@ export default function LogInArea() {
                                         login
                                     </button>
                                 </div>
-                                <div className='lg:my-[16px] my-[10px] w-[100%] mx-auto flex items-center justify-center'>
+                                <div className='lg:my-[20px] my-[10px] w-[100%] mx-auto flex items-center justify-center'>
                                     <div className='w-[250px] h-[2px] bg-linear-to-l from-[rgba(0,0,0,0.2)] to-[rgb(255,255,255)]'></div>
                                     <div className='lg:text-[14px] text-[11px] leading-[14px] text-[var-(--gray_text_color)] lg:px-[12px] px-[8px]'>or</div>
                                     <div className='w-[250px] h-[2px] bg-linear-to-r from-[rgba(0,0,0,0.2)] to-[rgb(255,255,255)]'></div>
 
                                 </div>
                                 <div className='lg:mb-[12px] mb-[8px]'>
-                                    <button onClick={googleLogIn} type='button' className='py-[5px] lg:px-[20px] px-[10px] lg:leading-[21px] leading-[16px] font-[600] capitalize lg:text-[12px] text-[9px] rounded-full  hover:bg-[var(--secondary_text_color)] duration-300 lg:h-[39px] h-[30px] w-[380px] mx-auto border-[0.1px] border-gray-400 flex items-center justify-center cursor-pointer'>
+                                    <button onClick={googleLogIn} type='button' className='py-[5px] lg:px-[20px] px-[10px] lg:leading-[21px] leading-[16px] font-[600] capitalize lg:text-[12px] text-[9px] rounded-full  hover:bg-[var(--secondary_text_color)] hover:text-white duration-300 lg:h-[39px] h-[30px] w-[380px] mx-auto border-[0.1px] border-gray-400 hover:border-white  flex items-center justify-center cursor-pointer'>
                                         <FcGoogle className=' lg:text-[18px] text-[13px] lg:leading-[21px] leading-[16px] lg:mr-[20px] mr-[12px]' />
                                         login with google
                                     </button>
                                 </div>
                                 <div className=''>
-                                    <button type='button' className='py-[5px] lg:px-[20px] px-[10px] lg:leading-[21px] leading-[16px] font-[600] capitalize lg:text-[12px] text-[9px] rounded-full  hover:bg-[var(--secondary_text_color)] duration-300 lg:h-[39px] h-[30px] w-[380px] mx-auto border-[0.1px] border-gray-400 flex items-center justify-center cursor-pointer'>
+                                    <button type='button' className='py-[5px] lg:px-[20px] px-[10px] lg:leading-[21px] leading-[16px] font-[600] capitalize lg:text-[12px] text-[9px] rounded-full  hover:bg-[var(--secondary_text_color)] hover:text-white duration-300 lg:h-[39px] h-[30px] w-[380px] mx-auto border-[0.1px] border-gray-400 hover:border-white flex items-center justify-center cursor-pointer'>
                                         <FaGithub className=' lg:text-[18px] text-[13px] lg:leading-[21px] leading-[16px] lg:mr-[20px] mr-[12px]' />
                                         login with github
                                     </button>

@@ -1,6 +1,6 @@
 import React from 'react'
-import ProductDetailTop from '../productDetailComponents.jsx/ProductDetailTop'
-import ProductDetailArea from '../productDetailComponents.jsx/ProductDetailArea'
+import ProductDetailArea from '../productDetailComponents/ProductDetailArea'
+import ProductDetailTop from '../productDetailComponents/ProductDetailTop'
 
 export default function ProductDetails() {
   return (

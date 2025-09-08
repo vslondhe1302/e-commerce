@@ -12,8 +12,6 @@ import { useSelector } from 'react-redux';
 import { store } from '@/app/store/store';
 import axios from 'axios';
 import { useParams } from 'next/navigation';
-// import axios from 'axios';
-// import { headers } from 'next/headers';
 
 export default function ProductDetailArea() {
     let [qty, setQty] = useState(1)
@@ -92,7 +90,6 @@ export default function ProductDetailArea() {
 
     let discountPrice = Number(actualPrice)-Number(salePrice)
     let discountPercent = ((discountPrice*100)/Number(actualPrice)).toFixed(2)
-    console.log(discountPercent);
 
     // let [currentIndex, setCurrentIndex] = useState(0)
     

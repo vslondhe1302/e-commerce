@@ -8,14 +8,17 @@ export default function Banner1({ sliderData, staticPath }) {
     var settings = {
         dots: true,
         infinite: true,
-        speed: 0,
+        speed: 900,
         slidesToShow: 1,
         slidesToScroll: 1,
         fade: true,
+        autoplay:true,
+        autoplaySpeed: 3000,
+        cssEase: "linear"
     };
     return (
         <>
-        {sliderData 
+        {sliderData.length>=1
         ?
         <div id='banner1Slider' className='mb-[35px]'>
             <Slider {...settings}>
@@ -32,7 +35,7 @@ export default function Banner1({ sliderData, staticPath }) {
             </Slider>
         </div>
         :
-        <div>Loading.....</div>
+        <div className='max-w-full text-center my-[50px]'>Loading.....</div>
         }
         </>
     );
